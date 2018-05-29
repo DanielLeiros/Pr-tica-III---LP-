@@ -6,13 +6,12 @@
 
 class Circuito{
 protected:
-	vector<*Sapo> puladores;
+	vector<Sapo> puladores;
 	int distancia;
 	string pista;
 public:
 	Circuito(){};
 	~Circuito(){};
-	void inserirSapo();
-	virtual void getEstatisticas();
-	virtual void chegada();
-}
+	void inserirSapo(int pulos, int pulosTotais, int distancia, int distanciaTotal, int vitorias, int provas, string nome, string identificador);
+	void iniciarcorrida();
+};
