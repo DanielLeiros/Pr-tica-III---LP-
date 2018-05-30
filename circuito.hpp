@@ -12,6 +12,10 @@ protected:
 public:
 	Circuito(){};
 	~Circuito(){};
-	void inserirSapo(int pulos, int pulosTotais, int distancia, int distanciaTotal, int vitorias, int provas, string nome, string identificador);
-	void iniciarcorrida();
+	void inserirSapo( int pulosTotais, int distanciaTotal, int vitorias, int provas, string nome, string identificador);
+	void corrida();
+	void salvarCorrida();
+	void zerarCorrida();
 };
+
+#endif
