@@ -16,6 +16,8 @@ public:
 	void corrida();
 	void salvarCorrida();
 	void zerarCorrida();
+	void Estatisticas();
+	void Pista();
 };
 
 #endif

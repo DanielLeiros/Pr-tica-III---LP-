@@ -1,16 +1,18 @@
 #ifndef _SAPO_
 #define _SAPO_
-#include "circuito.hpp"
-#include <string>
 using namespace std;
 
 class Sapo{
+
 protected:
-	int emProva;
+	int emProva, verificado;
 	int pulos, pulosTotais, distancia, distanciaTotal, vitorias, provas;
 	string	nome, identificador;
 public:
 	Sapo(){};
+	Sapo(int distanciaCorrida){
+		this->distanciaCorrida = distanciaCorrida;
+	};
 	Sapo(int pulosTotais, int distanciaTotal, int vitorias, int provas, string nome, string identificador){
 		this->pulos=0;
 		this->pulosTotais=pulosTotais;
@@ -20,22 +22,27 @@ public:
 		this->provas=provas;
 		this->nome=nome;
 		this->identificador=identificador;
-		this->emProva = 0;	
+		this->emProva = 1;	
+		this->verificado = 0;
 	};
 	~Sapo(){};
+
 	void pular();
 	void getEstatisticas();
 	bool chegada();
 	void vencedor();
 	string getNome();
 	bool getemProva();
-	string getNome();
+	void setemProva();
 	string getId();
 	int getPulosTotais();
 	int getDistanciaTotal();
 	int getVit();
 	int getProvas();
-	static const int distanciaCorrida = 50;
+	bool getVerificado();
+	void setVerificado();
+	void zerarTempo();
+	static int distanciaCorrida;
 };
 
 #endif

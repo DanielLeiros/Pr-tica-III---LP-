@@ -2,26 +2,38 @@
 #include "sapo.hpp"
 #include <ctime>
 #include <cstdlib>
+#include <vector>
+#include <string>
 using namespace std;
 
-void zerarTempo(){
+int Sapo::distanciaCorrida;
+
+void Sapo::zerarTempo(){
   srand(time(NULL));
 }
 
-string Sapo::getNome(){
-  return nome;
-}
-
 bool Sapo::getemProva(){
-  if(emProva == 0){
+  if(emProva == 1){
     return true;
   }else{
     return false;
   }
 }
 
+bool Sapo::getVerificado(){
+  if(verificado == 1){
+    return true;
+  }else{
+    return false;
+  }
+}
+
+void Sapo::setVerificado(){
+  verificado = 1;
+}
+
 void Sapo::setemProva(){
-  emProva = 1;
+  emProva = 0;
 }
 
 void Sapo::pular(){
@@ -33,14 +45,18 @@ void Sapo::pular(){
 
 void Sapo::getEstatisticas(){
 	cout << "Nome: " << nome << " Identificador: " << identificador;
-	cout << " Pulos: " << pulos << "Pulos totais: " << pulosTotais <<" Distancia: " << distancia << " Distancia total: " <<  distanciaTotal << " Vitorias" << vitorias << " Provas puladas: " << provas << endl;
+	cout << " Pulos: " << pulos << " Pulos totais: " << pulosTotais <<" Distancia: " << distancia << " Distancia total: " <<  distanciaTotal << " Vitorias: " << vitorias << " Provas puladas: " << provas << endl;
 
 }
 
 bool Sapo::chegada(){
 	if(distancia >= distanciaCorrida){
-		distanciaTotal += distancia;
-    pulosTotais += pulos;
+    if(!getVerificado()){
+  		distanciaTotal += distancia;
+      pulosTotais += pulos;
+      provas++;
+      setemProva(); 
+    }
 		return true;
 	}else{
 		return false;
@@ -70,6 +86,6 @@ int Sapo::getVit(){
   return vitorias;
 }
 
-int getProvas(){
+int Sapo::getProvas(){
     return provas;
 }
