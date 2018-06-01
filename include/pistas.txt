@@ -1,0 +1,8 @@
+Pista_de_fogo
+66
+Pista_na_floresta
+54
+Pista_de_gelo
+49
+Pista_sombria
+200

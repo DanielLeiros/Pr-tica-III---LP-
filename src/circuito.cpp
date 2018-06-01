@@ -14,7 +14,7 @@ using namespace std;
 /*@brief função para inserir sapo na corrida
 	@details tanto serve para dados do arquivo quanto para inserção manual de sapo*/
 void Circuito::inserirSapo(int pulosTotais, int distanciaTotal, int vitorias, int provas, string nome, string identificador){
-	
+
 	Sapo S(pulosTotais, distanciaTotal, vitorias, provas, nome, identificador);
 	puladores.push_back(S);
 
@@ -27,24 +27,60 @@ void Circuito::zerarCorrida(){
 /*@brief permite  seleção da pista para a corrida*/
 void Circuito::Pista(){
 	int option;
-	int tamanhoDapista;
-	cout << "== Pistas: "<< endl;
-	cout << "1 - Pista de fogo -> 66 metros de distância e muito quente" << endl;
-	cout << "2 - Pista na floresta -> 54 metros de um ambiente amigável" << endl;
-	cout << "3 - Pista de gelo -> 49 metros de uma pista congelantemente traiçoeira" << endl;
-	cout << "Nenhuma alternativa -> Pista sombria 200 metros de pura sombra" << endl;
-	cin >> option;
-	if(option == 1){
-		tamanhoDapista = 66;
-	}else if(option == 2){
-		tamanhoDapista = 54;
-	}else if(option == 3){
-		tamanhoDapista = 40;
-	}else{
-		tamanhoDapista = 200;
+	int passagemDeTamanho;
+	int auxTamanhoPista;
+	int auxIndice;
+	string auxInfoPista;
+	vector<string> infoPistas;
+	vector<int> tamanhoPista;
+	fstream pistaFile("../include/pistas.txt", ios::in | ios::out);
+	if(pistaFile.is_open()){
+		while(!pistaFile.eof()){
+			pistaFile >> auxInfoPista;
+			pistaFile >> auxTamanhoPista;
+			infoPistas.push_back(auxInfoPista);
+			tamanhoPista.push_back(auxTamanhoPista);
+		}
 	}
-	Sapo Pista(tamanhoDapista);
+	cout << "== Pistas: "<< endl;
+	for(unsigned int i=0; i < infoPistas.size(); i++){
+		cout << i+1<< " - " << infoPistas[i] << ": " << tamanhoPista[i] << "Metros"<< endl;
+		auxIndice = i+1;
+	}
+
+	cout << auxIndice+1 << " - " << "Para criar sua pista" << endl;
+	cout << "Digite a opção desejada: ";
+	cin >> option;
+	if(option-1 == auxIndice){
+			cout << "Digite as informações da nova pista(separadas por " << "_" << "(underline)): " << endl;
+			cout<< "Descrição da pista: ";
+			cin.ignore();
+			getline(cin, auxInfoPista);
+			cout << "Tamanho da pista: ";
+			cin >> auxTamanhoPista;
+			infoPistas.push_back(auxInfoPista);
+			tamanhoPista.push_back(auxTamanhoPista);
+			passagemDeTamanho = auxTamanhoPista;
+	}else if(option-1 > auxIndice){
+		cout << "Não possui pista com esse indice, tente novamente" << endl;
+		return;
+	}else{
+		cout << "Você escolheu: " << infoPistas[option] << endl;
+		passagemDeTamanho = tamanhoPista[option];
+	}
+
+	Sapo Pista(passagemDeTamanho);
 	Pista.zerarTempo();
+	for(unsigned int i=0; i < infoPistas.size(); i++){
+		if(i == infoPistas.size()-1){
+			pistaFile << infoPistas[i] << endl;
+			pistaFile << tamanhoPista[i];
+		}else{
+			pistaFile << infoPistas[i] << endl;
+			pistaFile << tamanhoPista[i] << endl;
+		}
+	}
+	pistaFile.close();
 }
 
 /*@brief realiza a corrida
@@ -87,7 +123,7 @@ void Circuito::corrida(){
 
 /*@brief salva os novos dados dos participantes no arquivo txt(mesmo que foi lido)*/
 void Circuito::salvarCorrida(){
-	ofstream file("corridaSapos.txt");
+	ofstream file("../include/corridaSapos.txt");
 	if(file.is_open()){
 		for (unsigned int i = 0; i < puladores.size(); i++){
 			if(i != puladores.size()-1){

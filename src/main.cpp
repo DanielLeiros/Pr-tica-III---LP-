@@ -22,7 +22,7 @@ using namespace std;
  	int option;
  	string pause;
  	Circuito C;
- 	fstream file("corridaSapos.txt", ios::in | ios::out);
+ 	fstream file("../include/corridaSapos.txt", ios::in | ios::out);
 
  	if(file.is_open()){
 		 	while(!file.eof()){

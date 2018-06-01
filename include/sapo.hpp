@@ -19,7 +19,6 @@ public:
 		this->distanciaCorrida = distanciaCorrida;
 	};
 	Sapo(int pulosTotais, int distanciaTotal, int vitorias, int provas, string nome, string identificador){
-		cout<< "sapo criado"<< endl;
 		this->pulos=0;
 		this->pulosTotais=pulosTotais;
 		this->distancia=0;
