@@ -24,7 +24,11 @@ void Circuito::zerarCorrida(){
 	puladores.clear();
 }
 
-/*@brief permite  seleção da pista para a corrida*/
+/*@brief permite  seleção da pista para a corrida
+	@details Ao realizar a leitura a partir do arquivo
+	essa função permite que o usuário escoha a pista ou
+	crie uma nova, que posteriormente também será inseri-
+	da no arquivo pistas.txt*/
 void Circuito::Pista(){
 	int option;
 	int passagemDeTamanho;
@@ -52,7 +56,7 @@ void Circuito::Pista(){
 		for(unsigned int i=0; i < infoPistas.size(); i++){
 			auxIndice = i+1;
 			cout << auxIndice << " - " << infoPistas[i] << ": " << tamanhoPista[i] << "Metros"<< endl;
-				
+
 		}
 
 		cout << auxIndice+1 << " - " << "Para criar sua pista" << endl;

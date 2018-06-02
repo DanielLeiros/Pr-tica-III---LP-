@@ -34,7 +34,8 @@ bool Sapo::getVerificado(){
   }
 }
 
-
+/*@brief auxilia na identificação daqueles que já foram verificados ao final da
+  prova*/
 void Sapo::setVerificado(){
   verificado = 1;
 }
@@ -70,7 +71,7 @@ bool Sapo::chegada(){
 		return false;
 	}
 }
-
+/*@brief salvar a vitória para o sapo que ganha a prova*/
 void Sapo::vencedor(){
 	vitorias++;
 }

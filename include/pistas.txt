@@ -10,3 +10,5 @@ Pista_do_vento
 68
 Pista_da_chuva
 111
+Pista_arco_iris
+44

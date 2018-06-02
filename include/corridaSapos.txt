@@ -1,4 +1,5 @@
-Daniel Leiros 350 1281 7 14
-Daphne Trindade 375 1278 2 14
-Jackson Fernandes 377 1283 3 14
-Merise Maciel 366 1275 2 14
+Daniel Leiros 364 1329 7 15
+Daphne Trindade 389 1324 2 15
+Jackson Fernandes 391 1327 3 15
+Merise Maciel 378 1323 3 15
+Juca mutuca 13 44 0 1
