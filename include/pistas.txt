@@ -6,3 +6,7 @@ Pista_de_gelo
 49
 Pista_sombria
 200
+Pista_do_vento
+68
+Pista_da_chuva
+111

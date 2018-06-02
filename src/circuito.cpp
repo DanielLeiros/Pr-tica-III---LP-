@@ -33,7 +33,9 @@ void Circuito::Pista(){
 	string auxInfoPista;
 	vector<string> infoPistas;
 	vector<int> tamanhoPista;
-	fstream pistaFile("../include/pistas.txt", ios::in | ios::out);
+
+	ifstream pistaFile("../include/pistas.txt");
+
 	if(pistaFile.is_open()){
 		while(!pistaFile.eof()){
 			pistaFile >> auxInfoPista;
@@ -42,45 +44,56 @@ void Circuito::Pista(){
 			tamanhoPista.push_back(auxTamanhoPista);
 		}
 	}
-	cout << "== Pistas: "<< endl;
-	for(unsigned int i=0; i < infoPistas.size(); i++){
-		cout << i+1<< " - " << infoPistas[i] << ": " << tamanhoPista[i] << "Metros"<< endl;
-		auxIndice = i+1;
-	}
+	pistaFile.close();
+	do{
+		cout << endl;
+		cout << "== Pistas: "<< endl;
 
-	cout << auxIndice+1 << " - " << "Para criar sua pista" << endl;
-	cout << "Digite a opção desejada: ";
-	cin >> option;
-	if(option-1 == auxIndice){
-			cout << "Digite as informações da nova pista(separadas por " << "_" << "(underline)): " << endl;
-			cout<< "Descrição da pista: ";
-			cin.ignore();
-			getline(cin, auxInfoPista);
-			cout << "Tamanho da pista: ";
-			cin >> auxTamanhoPista;
-			infoPistas.push_back(auxInfoPista);
-			tamanhoPista.push_back(auxTamanhoPista);
-			passagemDeTamanho = auxTamanhoPista;
-	}else if(option-1 > auxIndice){
-		cout << "Não possui pista com esse indice, tente novamente" << endl;
-		return;
-	}else{
-		cout << "Você escolheu: " << infoPistas[option] << endl;
-		passagemDeTamanho = tamanhoPista[option];
-	}
+		for(unsigned int i=0; i < infoPistas.size(); i++){
+			auxIndice = i+1;
+			cout << auxIndice << " - " << infoPistas[i] << ": " << tamanhoPista[i] << "Metros"<< endl;
+				
+		}
+
+		cout << auxIndice+1 << " - " << "Para criar sua pista" << endl;
+		cout << "Digite a opção desejada: ";
+		cin >> option;
+		if(option-1 == auxIndice){
+				cout << "Digite as informações da nova pista separadas por " << "_" << "(underline): " << endl;
+				cout<< "Descrição da pista: ";
+				cin.ignore();
+				getline(cin, auxInfoPista);
+				cout << "Tamanho da pista: ";
+				cin >> auxTamanhoPista;
+				//Inserindo no vector que mais tarde será printado no txt
+				infoPistas.push_back(auxInfoPista);
+				tamanhoPista.push_back(auxTamanhoPista);
+				passagemDeTamanho = auxTamanhoPista;
+
+		}else if(option-1 > auxIndice){
+			cout << "Não possui pista com esse indice, tente novamente" << endl;
+			return;
+		}else{
+			cout << "Você escolheu: " << infoPistas[option-1] << endl;
+			passagemDeTamanho = tamanhoPista[option-1];
+			cout << endl;
+		}
+
+	}while(option > auxIndice+1 || option < 1);
 
 	Sapo Pista(passagemDeTamanho);
 	Pista.zerarTempo();
+	ofstream printPistas("../include/pistas.txt");
 	for(unsigned int i=0; i < infoPistas.size(); i++){
 		if(i == infoPistas.size()-1){
-			pistaFile << infoPistas[i] << endl;
-			pistaFile << tamanhoPista[i];
+			printPistas << infoPistas[i] << endl;
+			printPistas << tamanhoPista[i];
 		}else{
-			pistaFile << infoPistas[i] << endl;
-			pistaFile << tamanhoPista[i] << endl;
+			printPistas << infoPistas[i] << endl;
+			printPistas << tamanhoPista[i] << endl;
 		}
 	}
-	pistaFile.close();
+	printPistas.close();
 }
 
 /*@brief realiza a corrida
