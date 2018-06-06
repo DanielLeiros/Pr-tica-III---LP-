@@ -27,6 +27,10 @@ Sapo: $(OBJ_DIR)/main.o $(OBJ_DIR)/circuito.o $(OBJ_DIR)/sapo.o
 	@echo "+++ [Executavel em $(BIN_DIR)] +++"
 	@echo "============="
 
+dir: 
+	mkdir build	
+	mkdir bin
+	
 $(OBJ_DIR)/main.o: $(SRC_DIR)/main.cpp
 	$(CC) -c $(CFLAGS) -o $@ $<
 
@@ -44,4 +48,6 @@ doxy:
 clear:
 	$(RM) $(BIN_DIR)/*
 	$(RM) $(OBJ_DIR)/*
+	rmdir build
+	rmdir bin
 # FIM do Makefile
